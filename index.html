@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="theme-1" lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8"/>
@@ -29,8 +29,41 @@
     <meta property="twitter:image" content="https://john-mirage.github.io/calculator-app/preview.jpg">
 </head>
 
-<body>
+<body class="page">
+    <main class="page__container">
 
+        <header class="header">
+            <h1 class="header__title">calc</h1>
+            <div class="switch">
+                <p class="switch__title">theme</p>
+                <div class="switch__button">
+                    <div class="switch__label-list">
+                        <label class="switch__label" for="theme-selector-1">1</label>
+                        <label class="switch__label" for="theme-selector-2">2</label>
+                        <label class="switch__label" for="theme-selector-3">3</label>
+                    </div>
+                    <div class="switch__input-list">
+                        <input class="switch__input" type="radio" value="theme-1" name="theme-selector" id="theme-selector-1" checked>
+                        <input class="switch__input" type="radio" value="theme-2" name="theme-selector" id="theme-selector-2">
+                        <input class="switch__input" type="radio" value="theme-3" name="theme-selector" id="theme-selector-3">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="screen">
+            <p class="screen__result">0</p>
+        </div>
+
+        <div class="keypad" id="keypad">
+            <template id="key-template">
+                <button class="keypad__key">
+                    <span class="keypad__label"></span>
+                </button>
+            </template>
+        </div>
+
+    </main>
     <script type="module" src="/src/main.ts"></script>
 </body>
 

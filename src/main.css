@@ -1,6 +1,13 @@
+@import "styles/page.css";
+@import "styles/header.css";
+@import "styles/switch.css";
+@import "styles/screen.css";
+@import "styles/keypad.css";
+
 .theme-1:root {
   --main-background: hsl(222, 26%, 31%);
   --toggle-background: hsl(223, 31%, 20%);
+  --toggle: hsl(6, 63%, 50%);
   --keypad-background: hsl(223, 31%, 20%);
   --screen-background: hsl(224, 36%, 15%);
   --del-reset-key-background: hsl(225, 21%, 49%);
@@ -18,6 +25,7 @@
 .theme-2:root {
   --main-background: hsl(0, 0%, 90%);
   --toggle-background: hsl(0, 5%, 81%);
+  --toggle: hsl(25, 98%, 40%);
   --keypad-background: hsl(0, 5%, 81%);
   --screen-background: hsl(0, 0%, 93%);
   --del-reset-key-background: hsl(185, 42%, 37%);
@@ -35,6 +43,7 @@
 .theme-3:root {
   --main-background: hsl(268, 75%, 9%);
   --toggle-background: hsl(268, 71%, 12%);
+  --toggle: hsl(176, 100%, 44%);
   --keypad-background: hsl(268, 71%, 12%);
   --screen-background: hsl(268, 71%, 12%);
   --del-reset-key-background: hsl(281, 89%, 26%);
