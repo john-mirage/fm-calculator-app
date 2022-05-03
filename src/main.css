@@ -1,0 +1,75 @@
+.theme-1:root {
+  --main-background: hsl(222, 26%, 31%);
+  --toggle-background: hsl(223, 31%, 20%);
+  --keypad-background: hsl(223, 31%, 20%);
+  --screen-background: hsl(224, 36%, 15%);
+  --del-reset-key-background: hsl(225, 21%, 49%);
+  --del-reset-key-shadow: hsl(224, 28%, 35%);
+  --equal-key-background: hsl(6, 63%, 50%);
+  --equal-key-shadow: hsl(6, 70%, 34%);
+  --number-operator-key-background: hsl(30, 25%, 89%);
+  --number-operator-key-shadow: hsl(28, 16%, 65%);
+  --del-reset-text: hsl(0, 0%, 100%);
+  --equal-text: hsl(0, 0%, 100%);
+  --number-operator-text: hsl(221, 14%, 31%);
+  --primary-text: hsl(0, 0%, 100%);
+}
+
+.theme-2:root {
+  --main-background: hsl(0, 0%, 90%);
+  --toggle-background: hsl(0, 5%, 81%);
+  --keypad-background: hsl(0, 5%, 81%);
+  --screen-background: hsl(0, 0%, 93%);
+  --del-reset-key-background: hsl(185, 42%, 37%);
+  --del-reset-key-shadow: hsl(185, 58%, 25%);
+  --equal-key-background: hsl(25, 98%, 40%);
+  --equal-key-shadow: hsl(25, 99%, 27%);
+  --number-operator-key-background: hsl(45, 7%, 89%);
+  --number-operator-key-shadow: hsl(35, 11%, 61%);
+  --del-reset-text: hsl(0, 0%, 100%);
+  --equal-text: hsl(0, 0%, 100%);
+  --number-operator-text: hsl(60, 10%, 19%);
+  --primary-text: hsl(60, 10%, 19%);
+}
+
+.theme-3:root {
+  --main-background: hsl(268, 75%, 9%);
+  --toggle-background: hsl(268, 71%, 12%);
+  --keypad-background: hsl(268, 71%, 12%);
+  --screen-background: hsl(268, 71%, 12%);
+  --del-reset-key-background: hsl(281, 89%, 26%);
+  --del-reset-key-shadow: hsl(285, 91%, 52%);
+  --equal-key-background: hsl(176, 100%, 44%);
+  --equal-key-shadow: hsl(177, 92%, 70%);
+  --number-operator-key-background: hsl(268, 47%, 21%);
+  --number-operator-key-shadow: hsl(290, 70%, 36%);
+  --del-reset-text: hsl(0, 0%, 100%);
+  --equal-text: hsl(198, 20%, 13%);
+  --number-operator-text: hsl(52, 100%, 62%);
+  --primary-text: hsl(52, 100%, 62%);
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  font-family:
+    'League Spartan',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
+}
