@@ -44,6 +44,8 @@ function reduceExpression() {
       default:
         throw new Error("Operator is not valid");
     }
+  } else {
+    throw new Error("Something went wrong");
   }
   operator = "";
   rightNumber = "";
