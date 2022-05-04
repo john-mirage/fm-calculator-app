@@ -119,6 +119,9 @@ function handleResult() {
     leftNumber = leftNumber.slice(0, leftNumber.length - 1);
   }
   updateScreen();
+  leftNumber = "0";
+  operator = "";
+  rightNumber = "";
 }
 
 function handleDelete() {
@@ -258,10 +261,10 @@ const keys = [
 
 keys.forEach((key) => {
   const keyFragment = keyTemplate.content.cloneNode(true) as HTMLElement;
-  const button = keyFragment.querySelector(".keypad__key") as HTMLButtonElement;
+  const button = keyFragment.querySelector(".keypad__button") as HTMLButtonElement;
   const label = keyFragment.querySelector(".keypad__label") as HTMLSpanElement;
-  button.classList.add(key.isRectangle ? "keypad__key--rectangle": "keypad__key--square");
-  button.classList.add(`keypad__key--${key.type}`);
+  button.classList.add(key.isRectangle ? "keypad__button--rectangle": "keypad__button--square");
+  button.classList.add(`keypad__button--${key.type}`);
   label.textContent = key.label;
   button.addEventListener("click", () => key.action(key.label));
   keypad.appendChild(document.createComment(key.label));

@@ -1,7 +1,7 @@
 .keypad {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.3rem;
+    gap: 1.6rem;
     width: 100%;
     height: auto;
     padding: 2.4rem;
@@ -9,75 +9,76 @@
     border-radius: 0.8rem;
 }
 
-.keypad__key {
+.keypad__button {
     position: relative;
     width: 100%;
     height: auto;
     border-radius: 0.4rem;
-}
-
-.keypad__key--number-operator {
-    background-color: var(--number-operator-key-shadow);
-}
-
-.keypad__key--del-reset {
-    background-color: var(--del-reset-key-shadow);
-}
-
-.keypad__key--equal {
-    background-color: var(--equal-key-shadow);
-}
-
-.keypad__key--square {
-    padding-top: 105%;
-}
-
-.keypad__key--rectangle {
-    grid-column: span 2 / span 2;
-    padding-top: 47.5%;
-}
-
-.keypad__button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 0.4rem);
-    border-radius: 0.4rem;
     border: none;
     font-family: inherit;
+    cursor: pointer;
 }
 
-.keypad__key--number-operator > .keypad__button {
+.keypad__button--number-operator {
     background-color: var(--number-operator-key-background);
+    box-shadow: 0 0.4rem var(--number-operator-key-shadow);
 }
 
-.keypad__key--del-reset > .keypad__button {
+.keypad__button--number-operator:active {
+    box-shadow: 0 0.2rem var(--number-operator-key-shadow);
+    transform: translateY(0.2rem);
+}
+
+.keypad__button--del-reset {
     background-color: var(--del-reset-key-background);
+    box-shadow: 0 0.4rem var(--del-reset-key-shadow);
 }
 
-.keypad__key--equal > .keypad__button {
+.keypad__button--del-reset:active {
+    box-shadow: 0 0.2rem var(--del-reset-key-shadow);
+    transform: translateY(0.2rem);
+}
+
+.keypad__button--equal {
     background-color: var(--equal-key-background);
+    box-shadow: 0 0.4rem var(--equal-key-shadow);
+}
+
+.keypad__button--equal:active {
+    box-shadow: 0 0.2rem var(--equal-key-shadow);
+    transform: translateY(0.2rem);
+}
+
+.keypad__button--square {
+    padding-top: 100%;
+}
+
+.keypad__button--rectangle {
+    grid-column: span 2 / span 2;
+    padding-top: 44.87%;
 }
 
 .keypad__label {
-    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-weight: 700;
     color: var(--number-operator-text);
 }
 
-.keypad__key--number-operator .keypad__label {
+.keypad__button--number-operator > .keypad__label {
     font-size: 2.8rem;
     color: var(--number-operator-text);
 }
 
-.keypad__key--del-reset .keypad__label {
+.keypad__button--del-reset > .keypad__label {
     text-transform: uppercase;
     font-size: 1.8rem;
     color: var(--del-reset-text);
 }
 
-.keypad__key--equal .keypad__label {
+.keypad__button--equal > .keypad__label {
     color: var(--equal-text);
     font-size: 1.8rem;
 }
