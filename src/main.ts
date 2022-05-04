@@ -15,92 +15,139 @@ themeSelectors.forEach(themeSelector => {
   });
 });
 
-let expression = "0";
-screenResult.textContent = expression;
+let leftNumber: string = "0";
+let operator: string = "";
+let rightNumber: string = "";
 
-const regex = /^(?!,)(?<left>[\d,]+)(?<!,)(?<operator>[+\-x\/])(?!,)(?<right>[\d,]+)(?<!,)$/;
-
-function reduceExpression(expression: string) {
-  const { groups } = expression.match(regex);
-  console.log(groups);
-  switch (groups.operator) {
-    case "+":
-      screenResult.textContent = String(Number(groups.left) + Number(groups.right));
-      break;
-    case "-":
-      screenResult.textContent = String(Number(groups.left) - Number(groups.right));
-      break;
-    case "x":
-      screenResult.textContent = String(Number(groups.left) * Number(groups.right));
-      break;
-    case "/":
-      screenResult.textContent = String(Number(groups.left) / Number(groups.right));
-      break;
-    default:
-      throw new Error("The operator is not valid");
-  }
+function updateScreen() {
+  screenResult.textContent = `${leftNumber}${operator !== "" ? ` ${operator}` : ""}${rightNumber !== "" ? ` ${rightNumber}` : ""}`;
 }
 
-function handleNumbers(number) {
-  if (screenResult.textContent !== "0") {
-    screenResult.textContent += number;
-  } else  {
-    screenResult.textContent = number;
-  }
-}
+updateScreen();
 
-function handleOperators(operator) {
-  const lastChar = screenResult.textContent[screenResult.textContent.length - 1];
-  const lastCharIsOperator = lastChar === "+" || lastChar === "-" || lastChar === "x" || lastChar === "/";
-  if (lastCharIsOperator) {
-    screenResult.textContent = screenResult.textContent.slice(0, -1) + operator;
-  } else {
-    const expressionHasOperator = screenResult.textContent.search(/[+\-x\/]/);
-    if (expressionHasOperator !== -1) {
-      reduceExpression(screenResult.textContent);
+/*
+const expressionRegex = /^-?(?!\.)(?<left>[\d.]+)(?<!\.)(?<operator>[+\-x\/])(?!\.)(?<right>[\d.]+)(?<!\.)$/;
+const numberWithSignRegex = /^-?(?!\.)[\d.]+(?<!\.)[+\-x\/.]$/;
+*/
+
+function reduceExpression() {
+  if (operator !== "" && rightNumber !== "") {
+    switch (operator) {
+      case "+":
+        leftNumber = String(Number(leftNumber) + Number(rightNumber));
+        break;
+      case "-":
+        leftNumber = String(Number(leftNumber) - Number(rightNumber));
+        break;
+      case "x":
+        leftNumber = String(Number(leftNumber) * Number(rightNumber));
+        break;
+      case "/":
+        leftNumber = String(Number(leftNumber) / Number(rightNumber));
+        break;
+      default:
+        throw new Error("Operator is not valid");
     }
-    screenResult.textContent += operator;
+  }
+  operator = "";
+  rightNumber = "";
+  updateScreen();
+}
+
+function handleNumber(number) {
+  if (operator !== "") {
+    if (number === "0") {
+      if (rightNumber !== "") {
+        rightNumber += number;
+      }
+    } else {
+      rightNumber += number;
+    }
+  } else {
+    if (number === "0") {
+      if (leftNumber !== "0") {
+        leftNumber += number;
+      }
+    } else {
+      if (leftNumber === "0") {
+        leftNumber = number;
+      } else {
+        leftNumber += number;
+      }
+    }
+  }
+  updateScreen();
+}
+
+function handleOperator(newOperator) {
+  if (operator !== "") {
+    if (rightNumber !== "") {
+      reduceExpression();
+    }
+  }
+  operator = newOperator;
+  updateScreen();
+}
+
+function handleDot(dot) {
+  if (operator !== "") {
+    // work on right number
+  } else {
+    // work on left number
   }
 }
 
 function handleResult() {
-  const lastChar = screenResult.textContent[screenResult.textContent.length - 1];
-  const lastCharIsOperator = lastChar === "+" || lastChar === "-" || lastChar === "x" || lastChar === "/";
-  if (lastCharIsOperator) {
-    screenResult.textContent = screenResult.textContent.slice(0, -1);
-  } else {
-    reduceExpression(screenResult.textContent);
+  if (operator !== "") {
+    if (rightNumber !== "") {
+      reduceExpression();
+    } else {
+      operator = "";
+    }
   }
+  updateScreen();
 }
 
 function handleDelete() {
-  if (screenResult.textContent.length <= 1) {
-    screenResult.textContent = "0";
+  if (operator !== "") {
+    if (rightNumber !== "") {
+      rightNumber = rightNumber.slice(0, rightNumber.length - 1);
+    } else {
+      operator = "";
+    }
   } else {
-    screenResult.textContent = screenResult.textContent.slice(0, -1);
+    if (leftNumber.length > 1) {
+      leftNumber = leftNumber.slice(0, leftNumber.length - 1);
+    } else {
+      leftNumber = "0";
+    }
   }
+  updateScreen();
 }
 
 function handleClear() {
-  screenResult.textContent = "0";
+  leftNumber = "0";
+  operator = "";
+  rightNumber = "";
+  updateScreen();
 }
 
 const keys = [
   {
     label: "7",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "8",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "9",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
@@ -112,73 +159,73 @@ const keys = [
   },
   {
     label: "4",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "5",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "6",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "+",
-    action: handleOperators,
+    action: handleOperator,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "1",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "2",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "3",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "-",
-    action: handleOperators,
+    action: handleOperator,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: ".",
-    action: "",
+    action: handleDot,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "0",
-    action: handleNumbers,
+    action: handleNumber,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "/",
-    action: handleOperators,
+    action: handleOperator,
     isRectangle: false,
     type: "number-operator",
   },
   {
     label: "x",
-    action: handleOperators,
+    action: handleOperator,
     isRectangle: false,
     type: "number-operator",
   },
@@ -203,9 +250,7 @@ keys.forEach((key) => {
   button.classList.add(key.isRectangle ? "keypad__key--rectangle": "keypad__key--square");
   button.classList.add(`keypad__key--${key.type}`);
   label.textContent = key.label;
-  button.addEventListener("click", (event) => {
-    key.action(key.label);
-  });
+  button.addEventListener("click", () => key.action(key.label));
   keypad.appendChild(document.createComment(key.label));
   keypad.appendChild(keyFragment);
 });
