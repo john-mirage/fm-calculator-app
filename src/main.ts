@@ -20,15 +20,11 @@ let operator: string = "";
 let rightNumber: string = "";
 
 function updateScreen() {
-  screenResult.textContent = `${leftNumber}${operator !== "" ? ` ${operator}` : ""}${rightNumber !== "" ? ` ${rightNumber}` : ""}`;
+  let expression = `${leftNumber}${operator !== "" ? ` ${operator}` : ""}${rightNumber !== "" ? ` ${rightNumber}` : ""}`;
+  screenResult.textContent = expression.replace(/[.]/g, ",");
 }
 
 updateScreen();
-
-/*
-const expressionRegex = /^-?(?!\.)(?<left>[\d.]+)(?<!\.)(?<operator>[+\-x\/])(?!\.)(?<right>[\d.]+)(?<!\.)$/;
-const numberWithSignRegex = /^-?(?!\.)[\d.]+(?<!\.)[+\-x\/.]$/;
-*/
 
 function reduceExpression() {
   if (operator !== "" && rightNumber !== "") {
@@ -82,8 +78,13 @@ function handleNumber(number) {
 function handleOperator(newOperator) {
   if (operator !== "") {
     if (rightNumber !== "") {
+      if (rightNumber.endsWith(".")) {
+        rightNumber = rightNumber.slice(0, rightNumber.length - 1);
+      }
       reduceExpression();
     }
+  } else if (leftNumber.endsWith(".")) {
+    leftNumber = leftNumber.slice(0, leftNumber.length - 1);
   }
   operator = newOperator;
   updateScreen();
@@ -91,19 +92,29 @@ function handleOperator(newOperator) {
 
 function handleDot(dot) {
   if (operator !== "") {
-    // work on right number
-  } else {
-    // work on left number
+    if (rightNumber !== "") {
+      if (!rightNumber.includes(".")) {
+        rightNumber += dot;
+      }
+    }
+  } else if (!leftNumber.includes(".")) {
+    leftNumber += dot;
   }
+  updateScreen();
 }
 
 function handleResult() {
   if (operator !== "") {
+    if (rightNumber.endsWith(".")) {
+      rightNumber = rightNumber.slice(0, rightNumber.length - 1);
+    }
     if (rightNumber !== "") {
       reduceExpression();
     } else {
       operator = "";
     }
+  } else if (leftNumber.endsWith(".")) {
+    leftNumber = leftNumber.slice(0, leftNumber.length - 1);
   }
   updateScreen();
 }
