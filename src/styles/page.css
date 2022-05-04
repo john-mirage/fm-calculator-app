@@ -17,3 +17,10 @@
         margin-right: auto;
     }
 }
+
+@media screen and (min-width: 540px) {
+    .page__container {
+        max-width: 540px;
+        padding: 9.2rem 2.4rem;
+    }
+}

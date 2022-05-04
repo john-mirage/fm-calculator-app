@@ -1,4 +1,5 @@
 .screen {
+    display: flex;
     width: 100%;
     height: 8.8rem;
     border-radius: 0.8rem;
@@ -8,10 +9,24 @@
 }
 
 .screen__result {
+    width: 100%;
     font-size: 3.2rem;
     font-weight: 700;
     text-align: end;
-    line-height: 4rem;
+    line-height: 3.2rem;
+    letter-spacing: -0.05rem;
     color: var(--primary-text);
-    margin: 0;
+    margin: auto 0;
+}
+
+@media screen and (min-width: 540px) {
+    .screen {
+        height: 12.8rem;
+    }
+
+    .screen__result {
+        font-size: 4.8rem;
+        line-height: 4.8rem;
+        letter-spacing: -0.1rem;
+    }
 }

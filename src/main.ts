@@ -107,21 +107,17 @@ function handleDot(dot) {
 
 function handleResult() {
   if (operator !== "") {
-    if (rightNumber.endsWith(".")) {
-      rightNumber = rightNumber.slice(0, rightNumber.length - 1);
-    }
+    if (rightNumber.endsWith(".")) rightNumber = rightNumber.slice(0, rightNumber.length - 1);
     if (rightNumber !== "") {
       reduceExpression();
     } else {
       operator = "";
+      updateScreen();
     }
   } else if (leftNumber.endsWith(".")) {
     leftNumber = leftNumber.slice(0, leftNumber.length - 1);
+    updateScreen();
   }
-  updateScreen();
-  leftNumber = "0";
-  operator = "";
-  rightNumber = "";
 }
 
 function handleDelete() {

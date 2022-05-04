@@ -1,7 +1,7 @@
 .keypad {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.6rem;
+    gap: 1.7rem 1.3rem;
     width: 100%;
     height: auto;
     padding: 2.4rem;
@@ -12,7 +12,6 @@
 .keypad__button {
     position: relative;
     width: 100%;
-    height: auto;
     border-radius: 0.4rem;
     border: none;
     font-family: inherit;
@@ -81,4 +80,35 @@
 .keypad__button--equal > .keypad__label {
     color: var(--equal-text);
     font-size: 1.8rem;
+}
+
+@media screen and (min-width: 375px) {
+    .keypad__button--square {
+        padding-top: 0;
+        height: 6rem;
+    }
+
+    .keypad__button--rectangle {
+        padding-top: 0;
+        height: 6rem;
+    }
+}
+
+@media screen and (min-width: 540px) {
+    .keypad {
+        padding: 3.2rem 3rem;
+        gap: 2.8rem 2.5rem;
+    }
+
+    .keypad__button--number-operator > .keypad__label {
+        font-size: 3.2rem;
+    }
+
+    .keypad__button--del-reset > .keypad__label {
+        font-size: 2rem;
+    }
+
+    .keypad__button--equal > .keypad__label {
+        font-size: 2rem;
+    }
 }
