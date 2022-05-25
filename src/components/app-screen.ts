@@ -18,9 +18,12 @@ class AppScreen extends HTMLElement {
 
   connectedCallback() {
     this.classList.add("screen");
+    const frame = <HTMLDivElement>document.createElement("div");
     this.result = <HTMLParagraphElement>document.createElement("p");
+    frame.classList.add("screen__frame");
     this.result.classList.add("screen__result");
-    this.appendChild(this.result);
+    frame.appendChild(this.result);
+    this.appendChild(frame);
   }
 }
 

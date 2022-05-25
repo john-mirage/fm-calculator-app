@@ -83,19 +83,19 @@ class AppRoot extends HTMLElement {
     } else if (this.leftNumber.endsWith(".")) {
       this.leftNumber = this.leftNumber.slice(0, this.leftNumber.length - 1);
     }
-    this.operator = newOperator;
+    this.operator = newOperator.replace("*", "x");
     this.screen?.updateResult(this.leftNumber, this.operator, this.rightNumber);
   }
 
-  handleFloat(dot: string) {
+  handleFloat() {
     if (this.operator !== "") {
       if (this.rightNumber !== "") {
         if (!this.rightNumber.includes(".")) {
-          this.rightNumber += dot;
+          this.rightNumber += ".";
         }
       }
     } else if (!this.leftNumber.includes(".")) {
-      this.leftNumber += dot;
+      this.leftNumber += ".";
     }
     this.screen?.updateResult(this.leftNumber, this.operator, this.rightNumber);
   }
@@ -148,26 +148,32 @@ class AppRoot extends HTMLElement {
     keypad.addEventListener("app-key-pressed", (event) => {
       const key: Key = (<CustomEvent>event).detail.key;
       switch (key.type) {
-        case "number":
-          this.handleNumber(key.label);
-          break;
-        case "operator":
-          this.handleOperator(key.label);
-          break;
-        case "float":
-          this.handleFloat(key.label);
-          break;
-        case "result":
-          this.handleResult();
-          break;
-        case "reset":
-          this.handleReset();
-          break;
-        case "delete":
-          this.handleDelete();
-          break;
-        default:
-          throw new Error("The key type is not valid");
+        case "number": this.handleNumber(key.label); break;
+        case "operator": this.handleOperator(key.label); break;
+        case "float": this.handleFloat(); break;
+        case "result": this.handleResult(); break;
+        case "reset": this.handleReset(); break;
+        case "delete": this.handleDelete(); break;
+        default: throw new Error("The key type is not valid");
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      const keyPressed = event.key;
+      const digitRegex = /^\d$/;
+      const operatorRegex = /^[*x\-+/]$/;
+      const resultRegex = /^Enter$|^=$/;
+      const deleteRegex = /^Delete$|^Backspace$/;
+      const floatRegex = /^[.,]$/;
+      if (digitRegex.test(keyPressed)) {
+        this.handleNumber(keyPressed);
+      } else if (operatorRegex.test(keyPressed)) {
+        this.handleOperator(keyPressed);
+      } else if (floatRegex.test(keyPressed)) {
+        this.handleFloat();
+      } else if (deleteRegex.test(keyPressed)) {
+        this.handleDelete();
+      } else if (resultRegex.test(keyPressed)) {
+        this.handleResult();
       }
     });
   }
