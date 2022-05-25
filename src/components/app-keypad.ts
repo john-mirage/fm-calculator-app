@@ -9,92 +9,92 @@ class AppKeypad extends HTMLElement {
       {
         label: "7",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "8",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "9",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "del",
         shape: "square",
-        type: "del-reset",
+        type: "delete",
       },
       {
         label: "4",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "5",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "6",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "+",
         shape: "square",
-        type: "number-operator",
+        type: "operator",
       },
       {
         label: "1",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "2",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "3",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "-",
         shape: "square",
-        type: "number-operator",
+        type: "operator",
       },
       {
         label: ".",
         shape: "square",
-        type: "number-operator",
+        type: "float",
       },
       {
         label: "0",
         shape: "square",
-        type: "number-operator",
+        type: "number",
       },
       {
         label: "/",
         shape: "square",
-        type: "number-operator",
+        type: "operator",
       },
       {
         label: "x",
         shape: "square",
-        type: "number-operator",
+        type: "operator",
       },
       {
         label: "reset",
         shape: "rectangle",
-        type: "del-reset",
+        type: "reset",
       },
       {
         label: "=",
         shape: "rectangle",
-        type: "equal",
+        type: "result",
       },
     ];
   }
@@ -102,12 +102,15 @@ class AppKeypad extends HTMLElement {
   connectedCallback() {
     this.classList.add("keypad");
     this.keys.forEach((key) => {
-      const buttonElement = document.createElement("button");
-      const labelElement = document.createElement("label");
+      const buttonElement = <HTMLButtonElement>document.createElement("button");
+      const labelElement = <HTMLSpanElement>document.createElement("span");
       buttonElement.classList.add("key", `key--${key.shape}`, `key--${key.type}`);
       labelElement.classList.add("key__label");
       labelElement.textContent = key.label;
       buttonElement.appendChild(labelElement);
+      buttonElement.addEventListener("click", () => {
+        this.dispatchEvent(new CustomEvent("app-key-pressed", { detail: { key }}));
+      });
       this.appendChild(buttonElement);
     });
   }

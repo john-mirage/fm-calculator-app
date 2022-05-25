@@ -5,7 +5,7 @@ class AppBar extends HTMLElement {
 
   connectedCallback() {
     this.classList.add("bar");
-    const titleElement = document.createElement("h1") as HTMLHeadingElement;
+    const titleElement = <HTMLHeadingElement>document.createElement("h1");
     const themeSwitch = document.createElement("app-theme-switch");
     titleElement.classList.add("bar__title");
     titleElement.textContent = "calc";

@@ -7,32 +7,38 @@
     cursor: pointer;
 }
 
-.key--number-operator {
+.key--number,
+.key--operator,
+.key--float {
     background-color: var(--number-operator-key-background);
     box-shadow: 0 0.4rem var(--number-operator-key-shadow);
 }
 
-.key--number-operator:active {
+.key--number:active,
+.key--operator:active,
+.key--float:active {
     box-shadow: 0 0.2rem var(--number-operator-key-shadow);
     transform: translateY(0.2rem);
 }
 
-.key--del-reset {
+.key--delete,
+.key--reset {
     background-color: var(--del-reset-key-background);
     box-shadow: 0 0.4rem var(--del-reset-key-shadow);
 }
 
-.key--del-reset:active {
+.key--delete:active,
+.key--reset:active {
     box-shadow: 0 0.2rem var(--del-reset-key-shadow);
     transform: translateY(0.2rem);
 }
 
-.key--equal {
+.key--result {
     background-color: var(--equal-key-background);
     box-shadow: 0 0.4rem var(--equal-key-shadow);
 }
 
-.key--equal:active {
+.key--result:active {
     box-shadow: 0 0.2rem var(--equal-key-shadow);
     transform: translateY(0.2rem);
 }
@@ -53,20 +59,24 @@
     transform: translate(-50%, -50%);
     font-weight: 700;
     color: var(--number-operator-text);
+    cursor: pointer;
 }
 
-.key--number-operator > .key__label {
+.key--number > .key__label,
+.key--operator > .key__label,
+.key--float > .key__label {
     font-size: 2.8rem;
     color: var(--number-operator-text);
 }
 
-.key--del-reset > .key__label {
+.key--delete > .key__label,
+.key--reset > .key__label {
     text-transform: uppercase;
     font-size: 1.8rem;
     color: var(--del-reset-text);
 }
 
-.key--equal > .key__label {
+.key--result > .key__label {
     color: var(--equal-text);
     font-size: 1.8rem;
 }
@@ -84,15 +94,18 @@
 }
 
 @media screen and (min-width: 540px) {
-    .key--number-operator > .key__label {
+    .key--number > .key__label,
+    .key--operator > .key__label,
+    .key--float > .key__label {
         font-size: 3.2rem;
     }
 
-    .key--del-reset > .key__label {
+    .key--delete > .key__label,
+    .key--reset > .key__label {
         font-size: 2rem;
     }
 
-    .key--equal > .key__label {
+    .key--result > .key__label {
         font-size: 2rem;
     }
 }

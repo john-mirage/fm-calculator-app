@@ -8,9 +8,9 @@ class AppThemeSwitch extends HTMLElement {
 
   connectedCallback() {
     this.classList.add("theme-switch");
-    const template = document.getElementById("template-theme-switch") as HTMLTemplateElement;
-    const fragment = template.content.cloneNode(true) as DocumentFragment;
-    const inputs = fragment.querySelectorAll(".theme-switch__input") as NodeListOf<HTMLInputElement>;
+    const template = <HTMLTemplateElement>document.getElementById("template-theme-switch");
+    const fragment = <DocumentFragment>template.content.cloneNode(true);
+    const inputs = <NodeListOf<HTMLInputElement>>fragment.querySelectorAll(".theme-switch__input");
     inputs.forEach((input, index) => {
       input.addEventListener("change", () => {
         const newTheme = `theme-${String(index + 1)}`;
