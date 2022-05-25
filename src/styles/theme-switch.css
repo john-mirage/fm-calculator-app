@@ -52,7 +52,7 @@
     display: flex;
     flex-direction: row;
     width: 7.2rem;
-    height: 2.6rem;
+    height: 2.4rem;
     border-radius: 9999px;
     background-color: var(--toggle-background);
 }
@@ -60,7 +60,7 @@
 .theme-switch__handle {
     position: absolute;
     left: 0;
-    top: 0.4rem;
+    top: 0.3rem;
     width: 1.8rem;
     height: 1.8rem;
     border-radius: 9999px;
@@ -68,17 +68,9 @@
     background-color: var(--toggle);
 }
 
-#theme-switch-input-1:checked ~ .theme-switch__section--input .theme-switch__handle {
-    transform: translateX(0.4rem);
-}
-
-#theme-switch-input-2:checked ~ .theme-switch__section--input .theme-switch__handle {
-    transform: translateX(2.7rem);
-}
-
-#theme-switch-input-3:checked ~ .theme-switch__section--input .theme-switch__handle {
-    transform: translateX(5.1rem);
-}
+#theme-switch-input-1:checked ~ .theme-switch__section--input .theme-switch__handle { transform: translateX(0.3rem); }
+#theme-switch-input-2:checked ~ .theme-switch__section--input .theme-switch__handle { transform: translateX(2.7rem); }
+#theme-switch-input-3:checked ~ .theme-switch__section--input .theme-switch__handle { transform: translateX(5.1rem); }
 
 .theme-switch__button {
     position: relative;
@@ -87,4 +79,8 @@
     height: 100%;
     cursor: pointer;
 }
+
+#theme-switch-input-1:focus-visible ~ .theme-switch__section--input #theme-switch-button-1 { outline: 0.1rem solid white; }
+#theme-switch-input-2:focus-visible ~ .theme-switch__section--input #theme-switch-button-2 { outline: 0.1rem solid white; }
+#theme-switch-input-3:focus-visible ~ .theme-switch__section--input #theme-switch-button-3 { outline: 0.1rem solid white; }
 
