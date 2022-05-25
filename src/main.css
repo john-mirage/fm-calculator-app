@@ -1,8 +1,9 @@
 @import "styles/page.css";
-@import "styles/header.css";
-@import "styles/switch.css";
+@import "styles/bar.css";
+@import "styles/theme-switch.css";
 @import "styles/screen.css";
 @import "styles/keypad.css";
+@import "styles/key.css";
 
 .theme-1:root {
   --main-background: hsl(222, 26%, 31%);

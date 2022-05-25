@@ -1,0 +1,90 @@
+.theme-switch {
+    width: auto;
+    height: auto;
+}
+
+.theme-switch__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.theme-switch__section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.theme-switch__section--label {
+    justify-content: flex-end;
+    margin-bottom: 0.8rem;
+}
+
+.theme-switch__section--button {
+    justify-content: flex-start;
+}
+
+.theme-switch__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    text-transform: uppercase;
+    margin: 0 2.2rem 0 0;
+}
+
+.theme-switch__label {
+    width: 2.4rem;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    margin: 0;
+}
+
+.theme-switch__track {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 7.2rem;
+    height: 2.6rem;
+    border-radius: 9999px;
+    background-color: var(--toggle-background);
+}
+
+.theme-switch__handle {
+    position: absolute;
+    left: 0;
+    top: 0.4rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 9999px;
+    transition: transform 150ms;
+    background-color: var(--toggle);
+}
+
+#theme-switch-input-1:checked ~ .theme-switch__section--input .theme-switch__handle {
+    transform: translateX(0.4rem);
+}
+
+#theme-switch-input-2:checked ~ .theme-switch__section--input .theme-switch__handle {
+    transform: translateX(2.7rem);
+}
+
+#theme-switch-input-3:checked ~ .theme-switch__section--input .theme-switch__handle {
+    transform: translateX(5.1rem);
+}
+
+.theme-switch__button {
+    position: relative;
+    z-index: 100;
+    flex: 1 1 0;
+    height: 100%;
+    cursor: pointer;
+}
+
