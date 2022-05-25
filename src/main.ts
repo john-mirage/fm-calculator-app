@@ -1,7 +1,7 @@
 import './main.css';
 
 const themeSelectors = document.querySelectorAll(".switch__input");
-const keypad = document.querySelector("#keypad");
+const keypad = document.querySelector("#keypad") as HTMLDivElement;
 const keyTemplate = document.querySelector("#key-template") as HTMLTemplateElement;
 const screenResult = document.querySelector("#result") as HTMLParagraphElement;
 
@@ -52,7 +52,7 @@ function reduceExpression() {
   updateScreen();
 }
 
-function handleNumber(number) {
+function handleNumber(number: string) {
   if (operator !== "") {
     if (number === "0") {
       if (rightNumber !== "") {
@@ -77,7 +77,7 @@ function handleNumber(number) {
   updateScreen();
 }
 
-function handleOperator(newOperator) {
+function handleOperator(newOperator: string) {
   if (operator !== "") {
     if (rightNumber !== "") {
       if (rightNumber.endsWith(".")) {
@@ -92,7 +92,7 @@ function handleOperator(newOperator) {
   updateScreen();
 }
 
-function handleDot(dot) {
+function handleDot(dot: string) {
   if (operator !== "") {
     if (rightNumber !== "") {
       if (!rightNumber.includes(".")) {

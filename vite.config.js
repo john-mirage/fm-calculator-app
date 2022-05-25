@@ -6,8 +6,8 @@ export default defineConfig({
   base: "/calculator-app/",
   resolve: {
     alias: {
+      '@components': resolve(__dirname, 'src/components'),
       '@styles': resolve(__dirname, 'src/styles'),
-      '@scripts': resolve(__dirname, 'src/scripts'),
     },
   },
 })
