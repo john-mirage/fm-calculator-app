@@ -22,6 +22,10 @@ class AppBar extends HTMLElement {
     const fragment = <DocumentFragment>template.content.cloneNode(true);
     const element = <HTMLDivElement>fragment.querySelector(".theme-switch");
     const inputs = <NodeListOf<HTMLInputElement>>fragment.querySelectorAll(".theme-switch__input");
+    const buttons = <NodeListOf<HTMLButtonElement>>fragment.querySelectorAll(".theme-switch__button");
+    buttons.forEach((button, index) => {
+      button.setAttribute("id", `theme-switch-button-${index + 1}`);
+    });
     const defaultTheme = document.documentElement.dataset.theme;
     inputs.forEach((input, index) => {
       if (input.value === defaultTheme) input.checked = true;
