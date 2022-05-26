@@ -23,8 +23,9 @@ class AppBar extends HTMLElement {
     const element = <HTMLDivElement>fragment.querySelector(".theme-switch");
     const inputs = <NodeListOf<HTMLInputElement>>fragment.querySelectorAll(".theme-switch__input");
     const defaultTheme = document.documentElement.dataset.theme;
-    inputs.forEach((input) => {
+    inputs.forEach((input, index) => {
       if (input.value === defaultTheme) input.checked = true;
+      input.setAttribute("id", `theme-switch-input-${index + 1}`);
       input.addEventListener("change", (event) => {
         const newTheme = (<HTMLInputElement>event.target).value;
         this.dispatchEvent(new CustomEvent("app-theme-switch", { detail: { newTheme } }));
