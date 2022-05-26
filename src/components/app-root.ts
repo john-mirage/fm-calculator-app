@@ -9,14 +9,15 @@ interface AppScreen extends HTMLElement {
 }
 
 interface AppBar extends HTMLElement {
-  defaultThemeIndex: number;
+  setActiveThemeSwitchInput: (theme: string) => void;
 }
 
 class AppRoot extends HTMLElement {
   leftNumber: string;
   operator: string;
   rightNumber: string;
-  currentTheme: string;
+  availableThemes: string[];
+  lightThemePreferredMQL: MediaQueryList;
   screen?: AppScreen;
   bar?: AppBar;
 
@@ -25,10 +26,16 @@ class AppRoot extends HTMLElement {
     this.leftNumber = "0";
     this.operator = "";
     this.rightNumber = "";
-    const availableThemes = ["theme-1", "theme-2", "theme-3"];
-    const localStorageTheme = localStorage.getItem("theme") || false;
-    this.currentTheme = localStorageTheme && availableThemes.includes(localStorageTheme) ? localStorageTheme : "theme-1";
-    document.documentElement.dataset.theme = this.currentTheme;
+    this.availableThemes = ["theme-1", "theme-2", "theme-3"];
+    this.lightThemePreferredMQL = window.matchMedia("(prefers-color-scheme: light)");
+    const localStorageTheme = localStorage.getItem("theme") || "";
+    if (this.availableThemes.includes(localStorageTheme)) {
+      document.documentElement.dataset.theme = localStorageTheme;
+    } else if (this.lightThemePreferredMQL.matches) {
+      document.documentElement.dataset.theme = "theme-2";
+    } else {
+      document.documentElement.dataset.theme = "theme-1";
+    }
   }
 
   reduceExpression() {
@@ -151,10 +158,17 @@ class AppRoot extends HTMLElement {
 
   connectedCallback() {
     this.screen = <AppScreen>document.createElement("app-screen");
-    const bar = this.createBar();
+    this.bar = this.createBar();
     const keypad = this.createKeypad();
     this.listenKeyboard();
-    this.append(bar, this.screen, keypad);
+    this.append(this.bar, this.screen, keypad);
+    this.lightThemePreferredMQL.addEventListener("change", () => {
+      const localStorageTheme = localStorage.getItem("theme") || "";
+      if (!this.availableThemes.includes(localStorageTheme)) {
+        document.documentElement.dataset.theme = this.lightThemePreferredMQL.matches ? "theme-2" : "theme-1";
+        this.bar?.setActiveThemeSwitchInput(document.documentElement.dataset.theme);
+      }
+    });
   }
 
   createBar() {
@@ -163,7 +177,6 @@ class AppRoot extends HTMLElement {
       const newTheme = (<CustomEvent>event).detail.newTheme;
       localStorage.setItem("theme", newTheme);
       document.documentElement.dataset.theme = newTheme;
-      this.currentTheme = newTheme;
     });
     return bar;
   }

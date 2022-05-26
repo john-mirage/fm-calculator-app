@@ -12,6 +12,11 @@ class AppBar extends HTMLElement {
     this.append(titleElement, themeSwitch);
   }
 
+  setActiveThemeSwitchInput(theme: string) {
+    const input = <HTMLInputElement>document.querySelector(`.theme-switch__input[value=${theme}]`);
+    input.checked = true;
+  };
+
   createThemeSwitch() {
     const template = <HTMLTemplateElement>document.getElementById("template-theme-switch");
     const fragment = <DocumentFragment>template.content.cloneNode(true);
