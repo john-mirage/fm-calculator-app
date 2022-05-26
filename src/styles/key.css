@@ -93,7 +93,7 @@
     }
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 588px) {
     .key--number > .key__label,
     .key--operator > .key__label,
     .key--float > .key__label {

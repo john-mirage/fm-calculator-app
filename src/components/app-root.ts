@@ -8,17 +8,27 @@ interface AppScreen extends HTMLElement {
   ) => string;
 }
 
+interface AppBar extends HTMLElement {
+  defaultThemeIndex: number;
+}
+
 class AppRoot extends HTMLElement {
   leftNumber: string;
   operator: string;
   rightNumber: string;
+  currentTheme: string;
   screen?: AppScreen;
+  bar?: AppBar;
 
   constructor() {
     super();
     this.leftNumber = "0";
     this.operator = "";
     this.rightNumber = "";
+    const availableThemes = ["theme-1", "theme-2", "theme-3"];
+    const localStorageTheme = localStorage.getItem("theme") || false;
+    this.currentTheme = localStorageTheme && availableThemes.includes(localStorageTheme) ? localStorageTheme : "theme-1";
+    document.documentElement.dataset.theme = this.currentTheme;
   }
 
   reduceExpression() {
@@ -140,11 +150,26 @@ class AppRoot extends HTMLElement {
   }
 
   connectedCallback() {
-    const bar = document.createElement("app-bar");
     this.screen = <AppScreen>document.createElement("app-screen");
-    const keypad = document.createElement("app-keypad");
+    const bar = this.createBar();
+    const keypad = this.createKeypad();
+    this.listenKeyboard();
     this.append(bar, this.screen, keypad);
-    this.screen?.updateResult(this.leftNumber, this.operator, this.rightNumber);
+  }
+
+  createBar() {
+    const bar = <AppBar>document.createElement("app-bar");
+    bar?.addEventListener("app-theme-switch", (event) => {
+      const newTheme = (<CustomEvent>event).detail.newTheme;
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.dataset.theme = newTheme;
+      this.currentTheme = newTheme;
+    });
+    return bar;
+  }
+
+  createKeypad() {
+    const keypad = document.createElement("app-keypad");
     keypad.addEventListener("app-key-pressed", (event) => {
       const key: Key = (<CustomEvent>event).detail.key;
       switch (key.type) {
@@ -157,6 +182,10 @@ class AppRoot extends HTMLElement {
         default: throw new Error("The key type is not valid");
       }
     });
+    return keypad;
+  }
+
+  listenKeyboard() {
     document.addEventListener("keydown", (event) => {
       const keyPressed = event.key;
       const digitRegex = /^\d$/;

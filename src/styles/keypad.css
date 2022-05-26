@@ -9,7 +9,7 @@
     border-radius: 0.8rem;
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 588px) {
     .keypad {
         padding: 3.2rem 3rem;
         gap: 2.8rem 2.5rem;

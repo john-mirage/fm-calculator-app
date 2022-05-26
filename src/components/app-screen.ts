@@ -22,6 +22,7 @@ class AppScreen extends HTMLElement {
     this.result = <HTMLParagraphElement>document.createElement("p");
     frame.classList.add("screen__frame");
     this.result.classList.add("screen__result");
+    this.result.textContent = "0";
     frame.appendChild(this.result);
     this.appendChild(frame);
   }
