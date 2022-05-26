@@ -33,7 +33,7 @@
     font-weight: 700;
     text-align: end;
     line-height: 1;
-    letter-spacing: -0.05rem;
+    letter-spacing: 0.15rem;
     color: var(--primary-text);
     margin: 0;
 }
@@ -47,6 +47,6 @@
     .screen__result {
         margin-top: 1.2rem;
         font-size: 4.8rem;
-        letter-spacing: -0.1rem;
+        letter-spacing: 0.2rem;
     }
 }
