@@ -1,0 +1,111 @@
+.key {
+    position: relative;
+    width: 100%;
+    border-radius: 0.4rem;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.key--number,
+.key--operator,
+.key--float {
+    background-color: var(--number-operator-key-background);
+    box-shadow: 0 0.4rem var(--number-operator-key-shadow);
+}
+
+.key--number:active,
+.key--operator:active,
+.key--float:active {
+    box-shadow: 0 0.2rem var(--number-operator-key-shadow);
+    transform: translateY(0.2rem);
+}
+
+.key--delete,
+.key--reset {
+    background-color: var(--del-reset-key-background);
+    box-shadow: 0 0.4rem var(--del-reset-key-shadow);
+}
+
+.key--delete:active,
+.key--reset:active {
+    box-shadow: 0 0.2rem var(--del-reset-key-shadow);
+    transform: translateY(0.2rem);
+}
+
+.key--result {
+    background-color: var(--equal-key-background);
+    box-shadow: 0 0.4rem var(--equal-key-shadow);
+}
+
+.key--result:active {
+    box-shadow: 0 0.2rem var(--equal-key-shadow);
+    transform: translateY(0.2rem);
+}
+
+.key--square {
+    padding-top: 100%;
+}
+
+.key--rectangle {
+    grid-column: span 2 / span 2;
+    padding-top: 44.87%;
+}
+
+.key__label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    color: var(--number-operator-text);
+    cursor: pointer;
+}
+
+.key--number > .key__label,
+.key--operator > .key__label,
+.key--float > .key__label {
+    font-size: 2.8rem;
+    color: var(--number-operator-text);
+}
+
+.key--delete > .key__label,
+.key--reset > .key__label {
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    color: var(--del-reset-text);
+}
+
+.key--result > .key__label {
+    color: var(--equal-text);
+    font-size: 1.8rem;
+}
+
+@media screen and (min-width: 375px) {
+    .key--square {
+        padding-top: 0;
+        height: 6rem;
+    }
+
+    .key--rectangle {
+        padding-top: 0;
+        height: 6rem;
+    }
+}
+
+@media screen and (min-width: 588px) {
+    .key--number > .key__label,
+    .key--operator > .key__label,
+    .key--float > .key__label {
+        font-size: 3.2rem;
+    }
+
+    .key--delete > .key__label,
+    .key--reset > .key__label {
+        font-size: 2rem;
+    }
+
+    .key--result > .key__label {
+        font-size: 2rem;
+    }
+}

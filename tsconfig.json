@@ -17,8 +17,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@components/*": ["src/components/*"],
+      "@interfaces/*": ["src/interfaces/*"],
       "@styles/*": ["src/styles/*"],
-      "@scripts/*": ["src/scripts/*"],
     }
   },
   "include": ["src"]

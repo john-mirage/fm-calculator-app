@@ -18,9 +18,9 @@
     }
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 588px) {
     .page__container {
-        max-width: 540px;
+        max-width: 588px;
         padding: 9.2rem 2.4rem;
     }
 }
